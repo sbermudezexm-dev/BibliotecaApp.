@@ -1,115 +1,23 @@
-import javax.swing.*;
-import java.util.*;
 
-// Clase Autor
-class Autor {
-    private String nombre;
-    private String nacionalidad;
-    private Date fechaNacimiento;
+  # Proyecto Biblioteca en Java
 
-    public Autor(String nombre, String nacionalidad, Date fechaNacimiento) {
-        this.nombre = nombre;
-        this.nacionalidad = nacionalidad;
-        this.fechaNacimiento = fechaNacimiento;
-    }
+Este repositorio contiene la implementación de una aplicación de biblioteca en Java, desarrollada como parte del trabajo académico. El proyecto incluye tanto las **clases del modelo** como la **interfaz de usuario**, siguiendo el diagrama UML diseñado previamente.
+ Estructura del código
+El código está organizado en un único archivo `BibliotecaApp.java`, dentro del cual se encuentran todas las clases necesarias:
 
-    public String getNombre() {
-        return nombre;
-    }
+- **Autor**: representa a un autor con nombre, nacionalidad y fecha de nacimiento.
+- **Libro**: representa un libro con título, ISBN, año de publicación y su autor correspondiente.
+- **Biblioteca**: almacena la colección de libros y permite agregarlos y listarlos.
+- **BibliotecaUI**: clase de interfaz gráfica construida con Swing. Muestra los libros en una ventana y simula la interacción básica del usuario.
+- **Main**: clase principal que inicializa la biblioteca, crea autores y libros de ejemplo, y lanza la interfaz gráfica.
+ Relación con el UML
+El código corresponde directamente al diagrama UML entregado, donde se definen las clases del modelo (`Autor`, `Libro`, `Biblioteca`) y la interfaz (`BibliotecaUI`). La clase `Main` actúa como punto de entrada de la aplicación.
+ Maquetas de pantalla
+Además del código, se diseñaron maquetas de pantalla que muestran las funcionalidades principales:
+- Pantalla principal con listado de libros.
+- Pantalla para agregar un libro.
+- Pantalla para buscar un libro.
 
-    @Override
-    public String toString() {
-        return nombre + " (" + nacionalidad + ")";
-    }
-}
-
-// Clase Libro
-class Libro {
-    private String titulo;
-    private String isbn;
-    private int año;
-    private Autor autor;
-
-    public Libro(String titulo, String isbn, int año, Autor autor) {
-        this.titulo = titulo;
-        this.isbn = isbn;
-        this.año = año;
-        this.autor = autor;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    @Override
-    public String toString() {
-        return titulo + " (" + año + ") - " + autor.getNombre();
-    }
-}
-
-// Clase Biblioteca
-class Biblioteca {
-    private String nombre;
-    private String direccion;
-    private List<Libro> listaLibros;
-
-    public Biblioteca(String nombre, String direccion) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.listaLibros = new ArrayList<>();
-    }
-
-    public void agregarLibro(Libro libro) {
-        listaLibros.add(libro);
-    }
-
-    public List<Libro> listarLibros() {
-        return listaLibros;
-    }
-}
-
-// Clase BibliotecaUI (interfaz gráfica)
-class BibliotecaUI {
-    private Biblioteca biblioteca;
-    private DefaultListModel<String> modeloLista;
-    private JList<String> listaLibros;
-
-    public BibliotecaUI(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
-        this.modeloLista = new DefaultListModel<>();
-        this.listaLibros = new JList<>(modeloLista);
-    }
-
-    public void mostrarVentana() {
-        JFrame frame = new JFrame("Biblioteca - Mi Librería");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-
-        for (Libro libro : biblioteca.listarLibros()) {
-            modeloLista.addElement(libro.toString());
-        }
-
-        frame.add(new JScrollPane(listaLibros));
-        frame.setVisible(true);
-    }
-}
-
-// Clase principal Main
-public class BibliotecaApp {
-    public static void main(String[] args) {
-        Biblioteca biblioteca = new Biblioteca("Mi Librería", "Calle Principal 123");
-
-        Autor autor1 = new Autor("Gabriel García Márquez", "Colombiano", new Date());
-        Autor autor2 = new Autor("Isabel Allende", "Chilena", new Date());
-
-        Libro libro1 = new Libro("Cien años de soledad", "123456", 1967, autor1);
-        Libro libro2 = new Libro("La casa de los espíritus", "789101", 1982, autor2);
-
-        biblioteca.agregarLibro(libro1);
-        biblioteca.agregarLibro(libro2);
-
-        BibliotecaUI ui = new BibliotecaUI(biblioteca);
-        ui.mostrarVentana();
-    }
-}
-
+Estas maquetas ilustran cómo se vería la aplicación desde la perspectiva del usuario
+Nota
+El código entregado es **no funcional y sin interacción avanzada**, cumpliendo con las condiciones del trabajo. Su propósito es reflejar la estructura del sistema y la relación entre las clases, más que ofrecer una aplicación completa.
